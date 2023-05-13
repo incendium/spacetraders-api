@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class FufilledContract(
+public data class FulfilledContract(
     @SerialName("agent") val agent: Agent,
     @SerialName("contract") val contract: Contract,
 )

@@ -9,7 +9,7 @@ import com.iamincendium.spacetraders.api.models.DeliverContractRequest
 import com.iamincendium.spacetraders.api.models.AcceptedContract
 import com.iamincendium.spacetraders.api.models.Contract
 import com.iamincendium.spacetraders.api.models.DeliveredContract
-import com.iamincendium.spacetraders.api.models.FufilledContract
+import com.iamincendium.spacetraders.api.models.FulfilledContract
 import com.iamincendium.spacetraders.api.models.PagedResponse
 import com.iamincendium.spacetraders.api.models.Response
 import io.ktor.client.call.*
@@ -89,8 +89,8 @@ public class ContractsClient internal constructor(private val client: RestClient
      */
     public suspend fun fulfillContract(
         contractId: String,
-    ): APIResult<Response<FufilledContract>> = client.runRequiringToken {
+    ): APIResult<Response<FulfilledContract>> = client.runRequiringToken {
         client.post("/my/contracts/$contractId/fulfill")
-            .map { it.body<Response<FufilledContract>>() }
+            .map { it.body<Response<FulfilledContract>>() }
     }
 }

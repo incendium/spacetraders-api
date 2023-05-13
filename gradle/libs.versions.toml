@@ -7,6 +7,7 @@ kotlin = "1.8.21"
 kotlinx-coroutines = "1.7.0"
 kotlinx-serialization = "1.5.1"
 ktor = "2.3.0"
+slf4j = "2.0.7"
 versions = "0.45.0"
 versionsFilter = "0.1.16"
 
@@ -29,6 +30,8 @@ ionspin-bignum = "com.ionspin.kotlin:bignum:0.3.8"
 ionspin-bignumSerializationKotlinx = "com.ionspin.kotlin:bignum-serialization-kotlinx:0.3.8"
 michaelBull-kotlin-result = "com.michael-bull.kotlin-result:kotlin-result:1.1.17"
 microutils-kotlinLogging = "io.github.microutils:kotlin-logging:3.0.5"
+slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
+slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j" }
 
 test-assertk-common = { module = "com.willowtreeapps.assertk:assertk", version.ref = "assertk" }
 test-junit-all = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }

@@ -75,11 +75,13 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(libs.ktor.client.cio)
+                implementation(libs.slf4j.api)
             }
         }
         val jvmTest by getting {
             dependencies {
                 implementation(libs.bundles.commonTest.jvm)
+                implementation(libs.slf4j.simple)
             }
         }
         val jsMain by getting {

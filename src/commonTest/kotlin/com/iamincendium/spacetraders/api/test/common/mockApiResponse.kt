@@ -3,6 +3,7 @@ package com.iamincendium.spacetraders.api.test.common
 import com.iamincendium.spacetraders.api.client.internal.defaultHttpClient
 import io.ktor.client.*
 import io.ktor.client.engine.mock.*
+import io.ktor.client.plugins.logging.*
 import io.ktor.http.*
 
 fun mockApiResponse(
@@ -22,5 +23,5 @@ fun mockApiResponse(
         }
     }
 
-    return defaultHttpClient(mockEngine)
+    return defaultHttpClient(mockEngine, LogLevel.ALL)
 }
