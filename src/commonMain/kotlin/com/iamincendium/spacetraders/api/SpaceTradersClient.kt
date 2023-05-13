@@ -13,6 +13,7 @@ import com.iamincendium.spacetraders.api.models.RegisterRequest
 import com.iamincendium.spacetraders.api.models.Registration
 import com.iamincendium.spacetraders.api.result.APIResult
 import io.ktor.client.HttpClient
+import io.ktor.client.engine.cio.*
 
 /**
  * A rate limit aware API client for the Space Traders API.
@@ -20,7 +21,7 @@ import io.ktor.client.HttpClient
 public class SpaceTradersClient internal constructor(
     apiToken: String?,
     baseUrl: String,
-    httpClient: HttpClient = defaultHttpClient(),
+    httpClient: HttpClient = defaultHttpClient(CIO.create()),
 ) {
     /**
      * Construct a new instance of this API client. This instance can only be used to register for a new API token.

@@ -70,6 +70,7 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(libs.bundles.commonTest.common)
+                implementation(libs.ktor.client.mock)
             }
         }
         // val jvmMain by getting
