@@ -1,5 +1,18 @@
 <?xml version="1.0" ?>
 <SmellBaseline>
-    <ManuallySuppressedIssues />
-    <CurrentIssues />
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>ForbiddenComment:DefaultRestClient.kt$DefaultRestClient$// TODO: Remove suppression once custom cases are actually added.</ID>
+    <ID>ForbiddenComment:FleetClient.kt$FleetClient$* #### Extract Resources * * Extract resources from the waypoint into your ship. Send an optional survey as the payload to target specific * yields. * * TODO: Fill out remaining parameters. * * @param shipSymbol The symbol of the ship</ID>
+    <ID>ForbiddenComment:FleetClient.kt$FleetClient$* #### Jettison Cargo * * Jettison cargo from your ship's cargo hold. * * TODO: Fill out remaining parameters. * * @param shipSymbol The symbol of the ship</ID>
+    <ID>ForbiddenComment:FleetClient.kt$FleetClient$* #### Jump Ship * * Jump your ship instantly to a target system. Unlike other forms of navigation, jumping requires a unit of * antimatter. * * TODO: Fill out remaining parameters. * * @param shipSymbol The symbol of the ship</ID>
+    <ID>ForbiddenComment:FleetClient.kt$FleetClient$* #### Navigate Ship * * Navigate to a target destination. The destination must be located within the same system as the ship. Navigating * will consume the necessary fuel and supplies from the ship's manifest, and will pay out crew wages from the * agent's account. * * The returned response will detail the route information including the expected time of arrival. Most ship actions * are unavailable until the ship has arrived at its destination. * * To travel between systems, see the ship's warp or jump actions. * * TODO: Fill out remaining parameters. * * @param shipSymbol The symbol of the ship</ID>
+    <ID>ForbiddenComment:FleetClient.kt$FleetClient$* #### Purchase Cargo * * Purchase cargo. * * TODO: Fill out remaining parameters. * * @param shipSymbol The symbol of the ship</ID>
+    <ID>ForbiddenComment:FleetClient.kt$FleetClient$* #### Purchase Ship * * Purchase a ship. * * TODO: Fill out parameters.</ID>
+    <ID>ForbiddenComment:FleetClient.kt$FleetClient$* #### Sell Cargo * * Sell cargo. * * TODO: Fill out remaining parameters. * * @param shipSymbol The symbol of the ship</ID>
+    <ID>ForbiddenComment:FleetClient.kt$FleetClient$* #### Ship Refine * * Attempt to refine the raw materials on your ship. The request will only succeed if your ship is capable of * refining at the time of the request. * * TODO: Fill out remaining parameters. * * @param shipSymbol The symbol of the ship</ID>
+    <ID>ForbiddenComment:FleetClient.kt$FleetClient$* #### Transfer Cargo * * Transfer cargo between ships. * * TODO: Fill out remaining parameters. * * @param shipSymbol The symbol of the ship</ID>
+    <ID>ForbiddenComment:FleetClient.kt$FleetClient$* #### Update Ship Nav * * Update the nav data of a ship, such as the flight mode. * * TODO: Fill out remaining parameters. * * @param shipSymbol The symbol of the ship</ID>
+    <ID>ForbiddenComment:FleetClient.kt$FleetClient$* #### Warp Ship * * Warp your ship to a target destination in another system. Warping will consume the necessary fuel and supplies * from the ship's manifest, and will pay out crew wages from the agent's account. * * The returned response will detail the route information including the expected time of arrival. Most ship actions * are unavailable until the ship has arrived at it's destination. * * TODO: Fill out remaining parameters. * * @param shipSymbol The symbol of the ship</ID>
+  </CurrentIssues>
 </SmellBaseline>

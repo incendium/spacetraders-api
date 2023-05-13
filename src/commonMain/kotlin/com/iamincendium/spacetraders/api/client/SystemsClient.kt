@@ -98,7 +98,8 @@ public class SystemsClient internal constructor(private val client: RestClient) 
     /**
      * #### Get Shipyard
      *
-     * Get the shipyard for a waypoint. Send a ship to the waypoint to access ships that are currently available for purchase and recent transactions.
+     * Get the shipyard for a waypoint. Send a ship to the waypoint to access ships that are currently available for
+     * purchase and recent transactions.
      *
      * @param systemSymbol The system symbol
      * @param waypointSymbol The waypoint symbol
