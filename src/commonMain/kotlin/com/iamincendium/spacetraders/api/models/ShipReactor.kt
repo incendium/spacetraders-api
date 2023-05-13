@@ -14,10 +14,10 @@ public data class ShipReactor(
 ) {
     @Serializable
     public enum class Symbol {
-        @SerialName("REACTOR_SOLAR_I") SOLAR_I,
-        @SerialName("REACTOR_FUSION_I") FUSION_I,
-        @SerialName("REACTOR_FISSION_I") FISSION_I,
-        @SerialName("REACTOR_CHEMICAL_I") CHEMICAL_I,
-        @SerialName("REACTOR_ANTIMATTER_I") ANTIMATTER_I,
+        @SerialName("REACTOR_SOLAR_I") REACTOR_SOLAR_I,
+        @SerialName("REACTOR_FUSION_I") REACTOR_FUSION_I,
+        @SerialName("REACTOR_FISSION_I") REACTOR_FISSION_I,
+        @SerialName("REACTOR_CHEMICAL_I") REACTOR_CHEMICAL_I,
+        @SerialName("REACTOR_ANTIMATTER_I") REACTOR_ANTIMATTER_I,
     }
 }

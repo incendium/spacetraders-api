@@ -16,9 +16,9 @@ public data class ShipEngine(
 ) {
     @Serializable
     public enum class Symbol {
-        @SerialName("ENGINE_IMPULSE_DRIVE_I") IMPULSE_DRIVE_I,
-        @SerialName("ENGINE_ION_DRIVE_I") ION_DRIVE_I,
-        @SerialName("ENGINE_ION_DRIVE_II") ION_DRIVE_II,
-        @SerialName("ENGINE_HYPER_DRIVE_I") HYPER_DRIVE_I,
+        @SerialName("ENGINE_IMPULSE_DRIVE_I") ENGINE_IMPULSE_DRIVE_I,
+        @SerialName("ENGINE_ION_DRIVE_I") ENGINE_ION_DRIVE_I,
+        @SerialName("ENGINE_ION_DRIVE_II") ENGINE_ION_DRIVE_II,
+        @SerialName("ENGINE_HYPER_DRIVE_I") ENGINE_HYPER_DRIVE_I,
     }
 }

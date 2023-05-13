@@ -11,5 +11,5 @@ public data class ScannedShip(
     @SerialName("engine") val engine: ScannedShipEngine,
     @SerialName("frame") val frame: ScannedShipFrame? = null,
     @SerialName("reactor") val reactor: ScannedShipReactor? = null,
-    @SerialName("mounts") val mounts: List<ScannedShipMountsInner>? = null,
+    @SerialName("mounts") val mounts: List<ShipMountReference>? = null,
 )

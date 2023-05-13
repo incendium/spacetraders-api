@@ -4,6 +4,6 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class ShipyardShipTypesInner(
-    @SerialName("type") val type: ShipType? = null,
+public data class ShipMountReference(
+    @SerialName("symbol") val symbol: String,
 )

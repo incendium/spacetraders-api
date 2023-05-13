@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 public data class Shipyard(
     @SerialName("symbol") val symbol: String,
-    @SerialName("shipTypes") val shipTypes: List<ShipyardShipTypesInner>,
-    @SerialName("transactions") val transactions: List<ShipyardTransaction>? = null,
-    @SerialName("ships") val ships: List<ShipyardShip>? = null,
+    @SerialName("shipTypes") val shipTypes: List<ShipyardShipType>,
+    @SerialName("transactions") val transactions: List<ShipyardTransaction> = listOf(),
+    @SerialName("ships") val ships: List<ShipyardShip> = listOf(),
 )
