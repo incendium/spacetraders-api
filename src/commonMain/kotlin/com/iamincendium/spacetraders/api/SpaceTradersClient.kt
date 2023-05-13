@@ -47,17 +47,25 @@ public class SpaceTradersClient internal constructor(
         internal const val BASE_URL: String = "https://api.spacetraders.io/v2"
 
         /**
-         * Register a new client to retrieve the initial information and access token.
+         * #### Register Agent
          *
-         * @param callsign the desired callsign
-         * @param faction the desired faction
+         * Creates a new agent and ties it to a temporary account.
+         *
+         * The agent symbol is a 3-14 character string that will represent your agent. This symbol will prefix the
+         * symbol of every ship you own. Agent symbols will be cast to all uppercase characters.
+         *
+         * A new agent will be granted an authorization token, a contract with their starting faction, a command ship
+         * with a jump drive, and one hundred thousand credits.
+         *
+         * @param agentSymbol How other agents will see your ships and information.
+         * @param faction The faction you choose determines your headquarters.
          */
         public suspend fun register(
-            callsign: String,
+            agentSymbol: String,
             faction: RegisterRequest.Faction,
         ): APIResult<Registration> {
             val client = SpaceTradersClient()
-            return client.default.register(callsign, faction).map { it.payload }
+            return client.default.register(agentSymbol, faction).map { it.payload }
         }
     }
 }
