@@ -1,0 +1,59 @@
+[versions]
+assertk = "0.25"
+detekt = "1.22.0"
+junit = "5.9.3"
+kotest = "5.6.2"
+kotlin = "1.8.21"
+kotlinx-coroutines = "1.7.0"
+kotlinx-serialization = "1.5.1"
+ktor = "2.3.0"
+versions = "0.45.0"
+versionsFilter = "0.1.16"
+
+[libraries]
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-client-contentNegotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
+kotlinx-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.4.0"
+kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+
+ionspin-bignum = "com.ionspin.kotlin:bignum:0.3.8"
+ionspin-bignumSerializationKotlinx = "com.ionspin.kotlin:bignum-serialization-kotlinx:0.3.8"
+michaelBull-kotlin-result = "com.michael-bull.kotlin-result:kotlin-result:1.1.17"
+microutils-kotlinLogging = "io.github.microutils:kotlin-logging:3.0.5"
+
+test-assertk-common = { module = "com.willowtreeapps.assertk:assertk", version.ref = "assertk" }
+test-junit-all = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
+test-kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+test-kotest-extensions-ktor = "io.kotest.extensions:kotest-assertions-ktor:2.0.0"
+test-kotest-framework-datatest = { module = "io.kotest:kotest-framework-datatest", version.ref = "kotest" }
+test-kotest-framework-engine = { module = "io.kotest:kotest-framework-engine", version.ref = "kotest" }
+test-kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+
+[bundles]
+commonTest-common = [
+    "test-assertk-common",
+    "test-kotest-framework-datatest",
+    "test-kotest-framework-engine",
+]
+commonTest-jvm = [
+    "test-junit-all",
+    "test-kotest-runner-junit5",
+]
+# commonTest-js = []
+# commonTest-wasm = []
+
+[plugins]
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "kotlin" }
+kotest-multiplatform = { id = "io.kotest.multiplatform", version.ref = "kotest" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-plugin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+versions = { id = "com.github.ben-manes.versions", version.ref = "versions" }
+versionsFilter = { id = "se.ascp.gradle.gradle-versions-filter", version.ref = "versionsFilter" }
