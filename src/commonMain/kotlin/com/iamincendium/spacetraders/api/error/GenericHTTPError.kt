@@ -1,6 +1,7 @@
 package com.iamincendium.spacetraders.api.error
 
-public object GenericHTTPError : ResponseError {
-    override val message: String
-        get() = TODO("Not yet implemented")
+import io.ktor.http.*
+
+public data class GenericHTTPError(override val statusCode: HttpStatusCode, override val message: String) : HTTPError {
+    public constructor(statusCode: HttpStatusCode) : this(statusCode, statusCode.description)
 }

@@ -4,8 +4,12 @@ import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.iamincendium.spacetraders.api.result.APIResult
 import com.iamincendium.spacetraders.api.error.APIError
+import com.iamincendium.spacetraders.api.error.GenericHTTPError
+import com.iamincendium.spacetraders.api.error.GenericServerError
+import com.iamincendium.spacetraders.api.error.UnexpectedError
 import com.iamincendium.spacetraders.api.util.runOrErrorAndFlatten
 import io.ktor.client.*
+import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
@@ -13,6 +17,10 @@ import io.ktor.http.*
 import kotlinx.coroutines.delay
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.intOrNull
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 
 private const val DEFAULT_RATE_LIMIT_PER_SECOND = 2
 private const val DEFAULT_BURST_LIMIT = 10
@@ -68,8 +76,30 @@ internal class DefaultRestClient(
         rateLimitState = RateLimitState(limit, remaining, resetTime)
     }
 
-    private fun mapFailureToError(response: HttpResponse): APIError {
-        TODO()
+    private suspend fun mapFailureToError(response: HttpResponse): APIError = try {
+        val jsonObject = response.body<JsonObject>()
+        val code = jsonObject["code"]?.jsonPrimitive?.intOrNull
+        val message = jsonObject["message"]?.toString()
+        val data = jsonObject["data"]?.jsonObject
+
+        val status = response.status
+        if (code != null && message != null) {
+            codeToError(status, code, message, data ?: JsonObject(emptyMap()))
+        } else {
+            GenericHTTPError(status, message ?: status.description)
+        }
+    } catch (ex: NoTransformationFoundException) {
+        val status = response.status
+        GenericHTTPError(status, status.description)
+    }
+
+    private fun codeToError(
+        statusCode: HttpStatusCode,
+        code: Int,
+        message: String,
+        data: JsonObject,
+    ): APIError = when (code) {
+        else -> GenericServerError(statusCode, message, code, data)
     }
 
     override suspend fun get(path: String, builder: HttpRequestBuilder.() -> Unit): APIResult<HttpResponse> =
