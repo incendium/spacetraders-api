@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 public data class RegisterRequest(
     @SerialName("faction") val faction: Faction,
     @SerialName("symbol") val symbol: String,
+    @SerialName("email") val email: String?,
 ) {
     @Serializable
     public enum class Faction {

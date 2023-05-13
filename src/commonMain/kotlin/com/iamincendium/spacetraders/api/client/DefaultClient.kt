@@ -31,8 +31,9 @@ public class DefaultClient internal constructor(private val client: RestClient) 
     public suspend fun register(
         agentSymbol: String,
         faction: RegisterRequest.Faction,
+        email: String? = null,
     ): APIResult<Response<Registration>> = runOrErrorAndFlatten {
-        client.post("/register") { setBody(RegisterRequest(faction, agentSymbol)) }
+        client.post("/register") { setBody(RegisterRequest(faction, agentSymbol, email)) }
             .map { it.body<Response<Registration>>() }
     }
 }
