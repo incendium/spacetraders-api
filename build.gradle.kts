@@ -51,7 +51,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(libs.ktor.client.core)
-                implementation(libs.ktor.client.cio)
                 implementation(libs.ktor.client.contentNegotiation)
                 implementation(libs.ktor.client.logging)
                 implementation(libs.ktor.serialization.kotlinx.json)
@@ -73,13 +72,21 @@ kotlin {
                 implementation(libs.ktor.client.mock)
             }
         }
-        // val jvmMain by getting
+        val jvmMain by getting {
+            dependencies {
+                implementation(libs.ktor.client.cio)
+            }
+        }
         val jvmTest by getting {
             dependencies {
                 implementation(libs.bundles.commonTest.jvm)
             }
         }
-        // val jsMain by getting
+        val jsMain by getting {
+            dependencies {
+                implementation(libs.ktor.client.js)
+            }
+        }
         // val jsTest by getting
         // val wasmMain by getting
         // val wasmTest by getting
