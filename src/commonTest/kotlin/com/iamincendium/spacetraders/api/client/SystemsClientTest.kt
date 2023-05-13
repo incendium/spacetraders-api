@@ -5,7 +5,6 @@ import com.iamincendium.spacetraders.api.models.*
 import com.iamincendium.spacetraders.api.test.common.isValidPagedResponse
 import com.iamincendium.spacetraders.api.test.common.isValidResponse
 import com.iamincendium.spacetraders.api.test.common.mockApiClient
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import io.kotest.core.spec.style.FunSpec
 import kotlinx.datetime.Instant
 
@@ -326,7 +325,7 @@ class SystemsClientTest : FunSpec({
         )
     }
 
-    xtest("getShipyard - should handle the example data") {
+    test("getShipyard - should handle the example data") {
         val response = """
             {
                 "data": {
@@ -474,7 +473,7 @@ class SystemsClientTest : FunSpec({
                         name = "string",
                         description = "string",
                         condition = 0,
-                        speed = BigDecimal.ONE,
+                        speed = 1,
                         requirements = ShipRequirements(
                             power = 0,
                             crew = 0,
@@ -535,7 +534,7 @@ class SystemsClientTest : FunSpec({
 
         assertThat(api.systems.getJumpGate("string", "string")).isValidResponse(
             JumpGate(
-                jumpRange = BigDecimal.ZERO,
+                jumpRange = 0,
                 factionSymbol = "string",
                 connectedSystems = listOf(ConnectedSystem(
                     symbol = "string",

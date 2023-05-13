@@ -61,8 +61,8 @@ kotlin {
                 implementation(libs.kotlinx.serialization.json)
 
                 api(libs.michaelBull.kotlin.result)
-                api(libs.ionspin.bignum)
-                implementation(libs.ionspin.bignumSerializationKotlinx)
+                // api(libs.ionspin.bignum)
+                // implementation(libs.ionspin.bignumSerializationKotlinx)
                 implementation(libs.microutils.kotlinLogging)
             }
         }

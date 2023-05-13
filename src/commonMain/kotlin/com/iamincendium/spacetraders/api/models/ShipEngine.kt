@@ -1,7 +1,5 @@
 package com.iamincendium.spacetraders.api.models
 
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
-import kotlinx.serialization.Contextual
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,7 +8,7 @@ public data class ShipEngine(
     @SerialName("symbol") val symbol: Symbol,
     @SerialName("name") val name: String,
     @SerialName("description") val description: String,
-    @SerialName("speed") @Contextual val speed: BigDecimal,
+    @SerialName("speed") val speed: Int,
     @SerialName("requirements") val requirements: ShipRequirements,
     @SerialName("condition") val condition: Int? = null,
 ) {
