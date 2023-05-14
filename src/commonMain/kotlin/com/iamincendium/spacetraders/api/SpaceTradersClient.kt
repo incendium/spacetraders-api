@@ -16,23 +16,31 @@ import io.ktor.client.HttpClient
 
 /**
  * A rate limit aware API client for the Space Traders API.
+ *
+ * @property agents API client for interacting with the `/my/agent` endpoint.
+ * @property contracts API client for interacting with the `/my/contracts` endpoint.
+ * @property factions API client for interacting with the `/factions` endpoint.
+ * @property fleet API client for interacting with the `/my/ships` endpoint.
+ * @property systems API client for interacting with the `/systems` endpoint.
  */
 public class SpaceTradersClient internal constructor(
     apiToken: String?,
     baseUrl: String,
-    httpClient: HttpClient = defaultHttpClient(),
+    httpClient: HttpClient,
 ) {
     /**
      * Construct a new instance of this API client. This instance can only be used to register for a new API token.
      */
-    private constructor() : this(null, BASE_URL)
+    private constructor() : this(null, BASE_URL, defaultHttpClient())
 
     /**
-     * Construct a new instance of this API client.
+     * Construct a new instance of this API client. Requires the API token and optionally the base URL to use when
+     * sending requests to the server.
      *
      * @param apiToken the API token to use when interacting with the API
+     * @param baseUrl the URL prefix for the API endpoints (e.g. - https://api.spacetraders.io/v2)
      */
-    public constructor(apiToken: String) : this(apiToken, BASE_URL)
+    public constructor(apiToken: String, baseUrl: String = BASE_URL) : this(apiToken, baseUrl, defaultHttpClient())
 
     private val restClient = RestClient(apiToken, baseUrl, httpClient)
 
