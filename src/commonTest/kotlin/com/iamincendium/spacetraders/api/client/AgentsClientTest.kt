@@ -5,6 +5,7 @@ import com.iamincendium.spacetraders.api.models.Agent
 import com.iamincendium.spacetraders.api.test.common.isValidResponse
 import com.iamincendium.spacetraders.api.test.common.mockApiClient
 import io.kotest.core.spec.style.FunSpec
+import io.ktor.http.*
 
 class AgentsClientTest : FunSpec({
     test("getMyAgent - should handle the example data") {
@@ -19,7 +20,7 @@ class AgentsClientTest : FunSpec({
             }
         """.trimIndent()
 
-        val api = mockApiClient("/my/agent", response)
+        val api = mockApiClient(HttpMethod.Get, "/my/agent", response)
 
         assertThat(api.agents.getMyAgent()).isValidResponse(Agent(
             accountId = "string",

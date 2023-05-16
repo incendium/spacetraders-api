@@ -16,6 +16,7 @@ import com.iamincendium.spacetraders.api.test.common.isValidPagedResponse
 import com.iamincendium.spacetraders.api.test.common.isValidResponse
 import com.iamincendium.spacetraders.api.test.common.mockApiClient
 import io.kotest.core.spec.style.FunSpec
+import io.ktor.http.*
 import kotlinx.datetime.Instant
 
 class ContractsClientTest : FunSpec({
@@ -55,7 +56,7 @@ class ContractsClientTest : FunSpec({
             }
         """.trimIndent()
 
-        val api = mockApiClient("/my/contracts", response)
+        val api = mockApiClient(HttpMethod.Get, "/my/contracts", response)
 
         assertThat(api.contracts.listContracts()).isValidPagedResponse(
             listOf(Contract(
@@ -111,7 +112,7 @@ class ContractsClientTest : FunSpec({
             }
         """.trimIndent()
 
-        val api = mockApiClient("/my/contracts/string", response)
+        val api = mockApiClient(HttpMethod.Get, "/my/contracts/string", response)
 
         assertThat(api.contracts.getContract("string")).isValidResponse(
             Contract(
@@ -174,7 +175,7 @@ class ContractsClientTest : FunSpec({
             }
         """.trimIndent()
 
-        val api = mockApiClient("/my/contracts/string/accept", response)
+        val api = mockApiClient(HttpMethod.Post, "/my/contracts/string/accept", response)
 
         assertThat(api.contracts.acceptContract("string")).isValidResponse(
             AcceptedContract(
@@ -251,7 +252,7 @@ class ContractsClientTest : FunSpec({
             }
         """.trimIndent()
 
-        val api = mockApiClient("/my/contracts/string/deliver", response)
+        val api = mockApiClient(HttpMethod.Post, "/my/contracts/string/deliver", response)
 
         assertThat(api.contracts.deliverContract("string")).isValidResponse(
             DeliveredContract(
@@ -328,7 +329,7 @@ class ContractsClientTest : FunSpec({
             }
         """.trimIndent()
 
-        val api = mockApiClient("/my/contracts/string/fulfill", response)
+        val api = mockApiClient(HttpMethod.Post, "/my/contracts/string/fulfill", response)
 
         assertThat(api.contracts.fulfillContract("string")).isValidResponse(
             FulfilledContract(

@@ -15,6 +15,7 @@ import io.ktor.http.*
  */
 @Suppress("LongParameterList")
 fun mockApiClient(
+    expectedMethod: HttpMethod,
     expectedPath: String,
     response: String,
     status: HttpStatusCode = HttpStatusCode.OK,
@@ -24,5 +25,5 @@ fun mockApiClient(
 ): SpaceTradersClient = SpaceTradersClient(
     apiToken,
     baseUrl,
-    mockApiResponse("$baseUrl$expectedPath", response, status, headers),
+    mockApiResponse(expectedMethod, "$baseUrl$expectedPath", response, status, headers),
 )

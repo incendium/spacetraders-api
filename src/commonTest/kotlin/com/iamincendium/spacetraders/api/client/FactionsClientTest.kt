@@ -8,6 +8,7 @@ import com.iamincendium.spacetraders.api.test.common.isValidPagedResponse
 import com.iamincendium.spacetraders.api.test.common.isValidResponse
 import com.iamincendium.spacetraders.api.test.common.mockApiClient
 import io.kotest.core.spec.style.FunSpec
+import io.ktor.http.*
 
 class FactionsClientTest : FunSpec({
     test("listFactions - should handle the example data") {
@@ -36,7 +37,7 @@ class FactionsClientTest : FunSpec({
             }
         """.trimIndent()
 
-        val api = mockApiClient("/factions", response)
+        val api = mockApiClient(HttpMethod.Get, "/factions", response)
 
         assertThat(api.factions.listFactions()).isValidPagedResponse(
             listOf(Faction(
@@ -75,7 +76,7 @@ class FactionsClientTest : FunSpec({
             }
         """.trimIndent()
 
-        val api = mockApiClient("/factions/string", response)
+        val api = mockApiClient(HttpMethod.Get, "/factions/string", response)
 
         assertThat(api.factions.getFaction("string")).isValidResponse(
             Faction(

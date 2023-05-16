@@ -6,6 +6,7 @@ import com.iamincendium.spacetraders.api.test.common.isValidPagedResponse
 import com.iamincendium.spacetraders.api.test.common.isValidResponse
 import com.iamincendium.spacetraders.api.test.common.mockApiClient
 import io.kotest.core.spec.style.FunSpec
+import io.ktor.http.*
 import kotlinx.datetime.Instant
 
 class SystemsClientTest : FunSpec({
@@ -42,7 +43,7 @@ class SystemsClientTest : FunSpec({
             }
         """.trimIndent()
 
-        val api = mockApiClient("/systems", response)
+        val api = mockApiClient(HttpMethod.Get, "/systems", response)
 
         assertThat(api.systems.listSystems()).isValidPagedResponse(
             listOf(System(
@@ -89,7 +90,7 @@ class SystemsClientTest : FunSpec({
             }
         """.trimIndent()
 
-        val api = mockApiClient("/systems/string", response)
+        val api = mockApiClient(HttpMethod.Get, "/systems/string", response)
 
         assertThat(api.systems.getSystem("string")).isValidResponse(
             System(
@@ -149,7 +150,7 @@ class SystemsClientTest : FunSpec({
             }
         """.trimIndent()
 
-        val api = mockApiClient("/systems/string/waypoints", response)
+        val api = mockApiClient(HttpMethod.Get, "/systems/string/waypoints", response)
 
         assertThat(api.systems.listWaypoints("string")).isValidPagedResponse(
             listOf(Waypoint(
@@ -208,7 +209,7 @@ class SystemsClientTest : FunSpec({
             }
         """.trimIndent()
 
-        val api = mockApiClient("/systems/string/waypoints/string", response)
+        val api = mockApiClient(HttpMethod.Get, "/systems/string/waypoints/string", response)
 
         assertThat(api.systems.getWaypoint("string", "string")).isValidResponse(
             Waypoint(
@@ -284,7 +285,7 @@ class SystemsClientTest : FunSpec({
             }
         """.trimIndent()
 
-        val api = mockApiClient("/systems/string/waypoints/string/market", response)
+        val api = mockApiClient(HttpMethod.Get, "/systems/string/waypoints/string/market", response)
 
         assertThat(api.systems.getMarket("string", "string")).isValidResponse(
             Market(
@@ -424,7 +425,7 @@ class SystemsClientTest : FunSpec({
             }
         """.trimIndent()
 
-        val api = mockApiClient("/systems/string/waypoints/string/shipyard", response)
+        val api = mockApiClient(HttpMethod.Get, "/systems/string/waypoints/string/shipyard", response)
 
         assertThat(api.systems.getShipyard("string", "string")).isValidResponse(
             Shipyard(
@@ -530,7 +531,7 @@ class SystemsClientTest : FunSpec({
             }
         """.trimIndent()
 
-        val api = mockApiClient("/systems/string/waypoints/string/jump-gate", response)
+        val api = mockApiClient(HttpMethod.Get, "/systems/string/waypoints/string/jump-gate", response)
 
         assertThat(api.systems.getJumpGate("string", "string")).isValidResponse(
             JumpGate(
