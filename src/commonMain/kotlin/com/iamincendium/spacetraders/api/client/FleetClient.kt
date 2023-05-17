@@ -1,15 +1,17 @@
 package com.iamincendium.spacetraders.api.client
 
 import com.github.michaelbull.result.Err
-import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.map
 import com.iamincendium.spacetraders.api.client.internal.RestClient
 import com.iamincendium.spacetraders.api.client.internal.runRequiringToken
 import com.iamincendium.spacetraders.api.client.internal.setPageParameters
+import com.iamincendium.spacetraders.api.error.GenericHTTPError
 import com.iamincendium.spacetraders.api.models.*
 import com.iamincendium.spacetraders.api.result.APIResult
 import io.ktor.client.call.*
 import io.ktor.client.request.*
+import io.ktor.http.*
+import kotlinx.datetime.Clock
 
 /**
  * API client for interacting with the `/my/ships` endpoint.
@@ -83,7 +85,7 @@ public class FleetClient internal constructor(private val client: RestClient) {
     public suspend fun orbitShip(
         shipSymbol: String,
     ): APIResult<Response<OrbitShipResponse>> = client.runRequiringToken {
-        client.get("/my/ships/$shipSymbol/orbit").map { it.body<Response<OrbitShipResponse>>() }
+        client.post("/my/ships/$shipSymbol/orbit").map { it.body<Response<OrbitShipResponse>>() }
     }
 
     /**
@@ -138,16 +140,13 @@ public class FleetClient internal constructor(private val client: RestClient) {
      */
     public suspend fun getShipCooldown(
         shipSymbol: String,
-    ): APIResult<GetShipCooldownResponse> = client.runRequiringToken {
-        val response = when (val result = client.get("/my/ships/$shipSymbol/cooldown")) {
-            is Ok -> result.value
-            is Err -> return result
-        }
-
-        when (response.status.value) {
-            200 -> TODO()
-            204 -> TODO()
-            else -> TODO()
+    ): APIResult<Response<Cooldown>> = client.runRequiringToken {
+        client.get("/my/ships/$shipSymbol/cooldown").map { response ->
+            when (response.status) {
+                HttpStatusCode.OK -> response.body<Response<Cooldown>>()
+                HttpStatusCode.NoContent -> Response(Cooldown(shipSymbol, 0, 0, Clock.System.now()))
+                else -> return Err(GenericHTTPError(response.status))
+            }
         }
     }
 
@@ -413,7 +412,7 @@ public class FleetClient internal constructor(private val client: RestClient) {
         shipSymbol: String,
         transferCargoRequest: TransferCargoRequest,
     ): APIResult<Response<CargoTransfer>> = client.runRequiringToken {
-        client.post("/my/ships/$shipSymbol/purchase") { setBody(transferCargoRequest) }
+        client.post("/my/ships/$shipSymbol/transfer") { setBody(transferCargoRequest) }
             .map { it.body<Response<CargoTransfer>>() }
     }
 }

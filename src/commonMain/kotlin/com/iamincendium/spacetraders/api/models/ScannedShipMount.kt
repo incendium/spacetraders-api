@@ -4,6 +4,6 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class GetShipCooldownResponse(
-    @SerialName("data") val data: Cooldown,
+public data class ScannedShipMount(
+    @SerialName("symbol") val symbol: String,
 )
