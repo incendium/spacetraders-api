@@ -971,7 +971,7 @@ class FleetClientTest : FunSpec({
         val api = mockApiClient(HttpMethod.Post, "/my/ships/string/refine", response)
 
         val request = ShipRefineRequest(
-            produce = ShipRefineRequest.Produce.IRON,
+            symbol = ShipRefineRequest.Symbol.IRON,
         )
 
         assertThat(api.fleet.shipRefine("string", request)).isValidResponse(
@@ -1528,7 +1528,7 @@ class FleetClientTest : FunSpec({
 
         val api = mockApiClient(HttpMethod.Patch, "/my/ships/string/nav", response)
 
-        val request = PatchShipNavRequest(
+        val request = UpdateShipNavRequest(
             flightMode = ShipNavFlightMode.CRUISE,
         )
 

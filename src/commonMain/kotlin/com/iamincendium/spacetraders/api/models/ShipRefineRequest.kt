@@ -3,12 +3,17 @@ package com.iamincendium.spacetraders.api.models
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Request payload sent when refining in a ship.
+ *
+ * @param symbol The symbol of the processed material to produce.
+ */
 @Serializable
 public data class ShipRefineRequest(
-    @SerialName("produce") val produce: Produce,
+    @SerialName("produce") val symbol: Symbol,
 ) {
     @Serializable
-    public enum class Produce {
+    public enum class Symbol {
         @SerialName("IRON") IRON,
         @SerialName("COPPER") COPPER,
         @SerialName("SILVER") SILVER,

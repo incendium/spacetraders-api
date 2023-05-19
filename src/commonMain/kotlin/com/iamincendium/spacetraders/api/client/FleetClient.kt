@@ -39,7 +39,7 @@ public class FleetClient internal constructor(private val client: RestClient) {
      *
      * Purchase a ship.
      *
-     * TODO: Fill out parameters.
+     * @param purchaseShipRequest The request payload to send.
      */
     public suspend fun purchaseShip(
         purchaseShipRequest: PurchaseShipRequest,
@@ -94,9 +94,8 @@ public class FleetClient internal constructor(private val client: RestClient) {
      * Attempt to refine the raw materials on your ship. The request will only succeed if your ship is capable of
      * refining at the time of the request.
      *
-     * TODO: Fill out remaining parameters.
-     *
      * @param shipSymbol The symbol of the ship
+     * @param shipRefineRequest The request payload to send.
      */
     public suspend fun shipRefine(
         shipSymbol: String,
@@ -190,9 +189,8 @@ public class FleetClient internal constructor(private val client: RestClient) {
      * Extract resources from the waypoint into your ship. Send an optional survey as the payload to target specific
      * yields.
      *
-     * TODO: Fill out remaining parameters.
-     *
      * @param shipSymbol The symbol of the ship
+     * @param extractResourcesRequest The optional request payload to send.
      */
     public suspend fun extractResources(
         shipSymbol: String,
@@ -210,9 +208,8 @@ public class FleetClient internal constructor(private val client: RestClient) {
      *
      * Jettison cargo from your ship's cargo hold.
      *
-     * TODO: Fill out remaining parameters.
-     *
      * @param shipSymbol The symbol of the ship
+     * @param jettisonRequest The request payload to send.
      */
     public suspend fun jettison(
         shipSymbol: String,
@@ -228,9 +225,8 @@ public class FleetClient internal constructor(private val client: RestClient) {
      * Jump your ship instantly to a target system. Unlike other forms of navigation, jumping requires a unit of
      * antimatter.
      *
-     * TODO: Fill out remaining parameters.
-     *
      * @param shipSymbol The symbol of the ship
+     * @param jumpShipRequest The request payload to send.
      */
     public suspend fun jumpShip(
         shipSymbol: String,
@@ -252,9 +248,8 @@ public class FleetClient internal constructor(private val client: RestClient) {
      *
      * To travel between systems, see the ship's warp or jump actions.
      *
-     * TODO: Fill out remaining parameters.
-     *
      * @param shipSymbol The symbol of the ship
+     * @param navigateShipRequest The request payload to send.
      */
     public suspend fun navigateShip(
         shipSymbol: String,
@@ -269,15 +264,14 @@ public class FleetClient internal constructor(private val client: RestClient) {
      *
      * Update the nav data of a ship, such as the flight mode.
      *
-     * TODO: Fill out remaining parameters.
-     *
      * @param shipSymbol The symbol of the ship
+     * @param updateShipNavRequest The request payload to send.
      */
     public suspend fun updateShipNav(
         shipSymbol: String,
-        patchShipNavRequest: PatchShipNavRequest,
+        updateShipNavRequest: UpdateShipNavRequest,
     ): APIResult<Response<ShipNav>> = client.runRequiringToken {
-        client.patch("/my/ships/$shipSymbol/nav") { setBody(patchShipNavRequest) }
+        client.patch("/my/ships/$shipSymbol/nav") { setBody(updateShipNavRequest) }
             .map { it.body<Response<ShipNav>>() }
     }
 
@@ -301,9 +295,8 @@ public class FleetClient internal constructor(private val client: RestClient) {
      * The returned response will detail the route information including the expected time of arrival. Most ship actions
      * are unavailable until the ship has arrived at it's destination.
      *
-     * TODO: Fill out remaining parameters.
-     *
      * @param shipSymbol The symbol of the ship
+     * @param navigateShipRequest The request payload to send.
      */
     public suspend fun warpShip(
         shipSymbol: String,
@@ -318,9 +311,8 @@ public class FleetClient internal constructor(private val client: RestClient) {
      *
      * Sell cargo.
      *
-     * TODO: Fill out remaining parameters.
-     *
      * @param shipSymbol The symbol of the ship
+     * @param sellCargoRequest The request payload to send.
      */
     public suspend fun sellCargo(
         shipSymbol: String,
@@ -387,9 +379,8 @@ public class FleetClient internal constructor(private val client: RestClient) {
      *
      * Purchase cargo.
      *
-     * TODO: Fill out remaining parameters.
-     *
      * @param shipSymbol The symbol of the ship
+     * @param purchaseCargoRequest The request payload to send.
      */
     public suspend fun purchaseCargo(
         shipSymbol: String,
@@ -404,9 +395,8 @@ public class FleetClient internal constructor(private val client: RestClient) {
      *
      * Transfer cargo between ships.
      *
-     * TODO: Fill out remaining parameters.
-     *
      * @param shipSymbol The symbol of the ship
+     * @param transferCargoRequest The request payload to send.
      */
     public suspend fun transferCargo(
         shipSymbol: String,
