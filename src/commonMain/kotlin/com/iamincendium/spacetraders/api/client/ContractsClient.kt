@@ -67,7 +67,7 @@ public class ContractsClient internal constructor(private val client: RestClient
      * Deliver cargo on a given contract.
      *
      * @param contractId The ID of the contract
-     * @param deliverContractRequest  (optional)
+     * @param deliverContractRequest The optional request payload to send.
      */
     public suspend fun deliverContract(
         contractId: String,
