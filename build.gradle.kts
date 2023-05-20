@@ -5,7 +5,10 @@ plugins {
     alias(libs.plugins.detekt)
     alias(libs.plugins.versions)
     alias(libs.plugins.versionsFilter)
+    alias(libs.plugins.credentials)
 
+    `maven-publish`
+    signing
     idea
 }
 
@@ -93,4 +96,72 @@ kotlin {
         // val wasmMain by getting
         // val wasmTest by getting
     }
+}
+
+val credentials: nu.studer.gradle.credentials.domain.CredentialsContainer by project.extra
+val ossrhUsername: String? = System.getenv("OSSRH_USERNAME") ?: credentials.forKey("ossrhUsername")
+val ossrhPassword: String? = System.getenv("OSSRH_PASSWORD") ?: credentials.forKey("ossrhPassword")
+val signingKeyPath: String? = System.getenv("SIGN_KEY_PATH") ?: credentials.forKey("signingKeyPath")
+val signingPassword: String? = System.getenv("SIGN_PASSWORD") ?: credentials.forKey("signingPassword")
+
+publishing {
+    publications.withType<MavenPublication> {
+        pom {
+            name.set("spacetraders-api")
+            description.set("A Kotlin-based wrapper for the SpaceTraders API.")
+            url.set("https://github.com/incendium/space-traders-api")
+
+            licenses {
+                license {
+                    name.set("ISC License")
+                    url.set("https://spdx.org/licenses/ISC.html")
+                }
+            }
+
+            developers {
+                developer {
+                    id.set("incendium")
+                    name.set("Matthew Gast")
+                    email.set("incendium@gmail.com")
+                }
+            }
+
+            scm {
+                url.set("https://github.com/incendium/spacetraders-api")
+                connection.set("scm:git:https://github.com/incendium/spacetraders-api.git")
+                developerConnection.set("scm:git:https://github.com/incendium/spacetraders-api.git")
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = "ossrhSnapshots"
+            url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
+
+            credentials {
+                username = ossrhUsername
+                password = ossrhPassword
+            }
+        }
+
+        maven {
+            name = "ossrhStaging"
+            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+
+            credentials {
+                username = ossrhUsername
+                password = ossrhPassword
+            }
+        }
+    }
+}
+
+signing {
+    if (signingKeyPath != null) {
+        useInMemoryPgpKeys(signingKeyPath, signingPassword)
+    } else {
+        useGpgCmd()
+    }
+    publishing.publications.forEach { sign(it) }
 }

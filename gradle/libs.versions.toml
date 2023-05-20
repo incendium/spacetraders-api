@@ -1,5 +1,6 @@
 [versions]
 assertk = "0.25"
+credentials = "3.0"
 detekt = "1.22.0"
 junit = "5.9.3"
 kotest = "5.6.2"
@@ -55,6 +56,7 @@ commonTest-jvm = [
 # commonTest-wasm = []
 
 [plugins]
+credentials = { id = "nu.studer.credentials", version.ref = "credentials" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "kotlin" }
 kotest-multiplatform = { id = "io.kotest.multiplatform", version.ref = "kotest" }
