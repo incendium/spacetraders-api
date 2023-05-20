@@ -1,1 +1,1 @@
-rootProject.name = "space-traders-api"
+rootProject.name = "spacetraders-api"
