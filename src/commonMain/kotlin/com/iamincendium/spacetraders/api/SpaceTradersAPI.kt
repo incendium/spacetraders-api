@@ -1,6 +1,5 @@
 package com.iamincendium.spacetraders.api
 
-import com.github.michaelbull.result.map
 import com.iamincendium.spacetraders.api.client.AgentsClient
 import com.iamincendium.spacetraders.api.client.ContractsClient
 import com.iamincendium.spacetraders.api.client.DefaultClient

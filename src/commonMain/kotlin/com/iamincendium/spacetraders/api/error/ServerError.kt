@@ -10,6 +10,6 @@ import kotlinx.serialization.json.JsonObject
  * @property extraData a JSON object returned by the server providing an extra context related to this error
  */
 public sealed interface ServerError : HTTPError {
-    public val code: Int
+    public val code: APIErrorCode
     public val extraData: JsonObject
 }

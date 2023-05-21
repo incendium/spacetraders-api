@@ -4,8 +4,13 @@ package com.iamincendium.spacetraders.api.client.internal
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.iamincendium.spacetraders.api.error.APIError
+import com.iamincendium.spacetraders.api.error.APIErrorCode
+import com.iamincendium.spacetraders.api.error.AccountError
+import com.iamincendium.spacetraders.api.error.ContractError
 import com.iamincendium.spacetraders.api.error.GenericHTTPError
 import com.iamincendium.spacetraders.api.error.GenericServerError
+import com.iamincendium.spacetraders.api.error.MarketError
+import com.iamincendium.spacetraders.api.error.ShipError
 import com.iamincendium.spacetraders.api.models.ErrorResponse
 import com.iamincendium.spacetraders.api.result.APIResult
 import com.iamincendium.spacetraders.api.util.runOrErrorAndFlatten
@@ -84,8 +89,12 @@ internal class DefaultRestClient(
     private fun codeToError(
         statusCode: HttpStatusCode,
         error: ErrorResponse.Error,
-    ): APIError = when (error.code) {
-        else -> GenericServerError(statusCode, error.message, error.code, error.data)
+    ): APIError = when (val errorCode = APIErrorCode(error.code)) {
+        is APIErrorCode.Account -> AccountError(statusCode, error.message, errorCode, error.data)
+        is APIErrorCode.Contract -> ContractError(statusCode, error.message, errorCode, error.data)
+        is APIErrorCode.Market -> MarketError(statusCode, error.message, errorCode, error.data)
+        is APIErrorCode.Ship -> ShipError(statusCode, error.message, errorCode, error.data)
+        else -> GenericServerError(statusCode, error.message, errorCode, error.data)
     }
 
     override suspend fun get(path: String, builder: HttpRequestBuilder.() -> Unit): APIResult<HttpResponse> =
