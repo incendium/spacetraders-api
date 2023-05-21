@@ -165,3 +165,7 @@ signing {
     }
     publishing.publications.forEach { sign(it) }
 }
+
+tasks.build {
+    dependsOn(tasks.detektMetadataMain)
+}
