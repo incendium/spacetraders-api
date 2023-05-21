@@ -1,6 +1,6 @@
 package com.iamincendium.spacetraders.api.test.common
 
-import com.iamincendium.spacetraders.api.SpaceTradersClient
+import com.iamincendium.spacetraders.api.SpaceTradersAPI
 import io.ktor.http.*
 
 /**
@@ -21,8 +21,8 @@ fun mockApiClient(
     status: HttpStatusCode = HttpStatusCode.OK,
     headers: Headers = headersOf(HttpHeaders.ContentType, "application/json"),
     apiToken: String? = "dummy-token",
-    baseUrl: String = SpaceTradersClient.BASE_URL,
-): SpaceTradersClient = SpaceTradersClient(
+    baseUrl: String = SpaceTradersAPI.BASE_URL,
+): SpaceTradersAPI = SpaceTradersAPI(
     apiToken,
     baseUrl,
     mockApiResponse(expectedMethod, "$baseUrl$expectedPath", response, status, headers),

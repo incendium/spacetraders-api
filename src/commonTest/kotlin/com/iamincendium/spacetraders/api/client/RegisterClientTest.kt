@@ -1,7 +1,7 @@
 package com.iamincendium.spacetraders.api.client
 
 import assertk.assertThat
-import com.iamincendium.spacetraders.api.SpaceTradersClient
+import com.iamincendium.spacetraders.api.SpaceTradersAPI
 import com.iamincendium.spacetraders.api.client.internal.RestClient
 import com.iamincendium.spacetraders.api.models.*
 import com.iamincendium.spacetraders.api.test.common.isValidResponse
@@ -193,7 +193,7 @@ class RegisterClientTest : FunSpec({
             }
         """.trimIndent()
 
-        val baseUrl = SpaceTradersClient.BASE_URL
+        val baseUrl = SpaceTradersAPI.BASE_URL
         val httpClient = mockApiResponse(HttpMethod.Post, "$baseUrl/register", response)
         val restClient = RestClient("dummy-token", baseUrl, httpClient)
         val registerClient = RegisterClient(restClient)

@@ -24,7 +24,7 @@ import io.ktor.client.*
  * @property fleet API client for interacting with the `/my/ships` endpoint.
  * @property systems API client for interacting with the `/systems` endpoint.
  */
-public class SpaceTradersClient internal constructor(
+public class SpaceTradersAPI internal constructor(
     apiToken: String?,
     baseUrl: String,
     httpClient: HttpClient,
@@ -75,7 +75,7 @@ public class SpaceTradersClient internal constructor(
             faction: RegisterRequest.Faction,
             email: String? = null,
         ): APIResult<Registration> {
-            val client = SpaceTradersClient()
+            val client = SpaceTradersAPI()
             return client.register.register(agentSymbol, faction, email).map { it.payload }
         }
     }
