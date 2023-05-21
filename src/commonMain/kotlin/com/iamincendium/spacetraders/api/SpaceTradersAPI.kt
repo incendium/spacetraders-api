@@ -12,7 +12,9 @@ import com.iamincendium.spacetraders.api.client.internal.RestClient
 import com.iamincendium.spacetraders.api.client.internal.defaultHttpClient
 import com.iamincendium.spacetraders.api.models.RegisterRequest
 import com.iamincendium.spacetraders.api.models.Registration
+import com.iamincendium.spacetraders.api.models.StatusResponse
 import com.iamincendium.spacetraders.api.result.APIResult
+import com.iamincendium.spacetraders.api.result.mapPayload
 import io.ktor.client.*
 
 /**
@@ -56,6 +58,15 @@ public class SpaceTradersAPI internal constructor(
     public companion object {
         internal const val BASE_URL: String = "https://api.spacetraders.io/v2"
 
+        private val tokenlessApi by lazy { SpaceTradersAPI() }
+
+        /**
+         * #### Get Status
+         *
+         * Return the status of the game server.
+         */
+        public suspend fun status(): APIResult<StatusResponse> = tokenlessApi.default.status()
+
         /**
          * #### Register Agent
          *
@@ -74,9 +85,6 @@ public class SpaceTradersAPI internal constructor(
             agentSymbol: String,
             faction: RegisterRequest.Faction,
             email: String? = null,
-        ): APIResult<Registration> {
-            val client = SpaceTradersAPI()
-            return client.register.register(agentSymbol, faction, email).map { it.payload }
-        }
+        ): APIResult<Registration> = tokenlessApi.register.register(agentSymbol, faction, email).mapPayload()
     }
 }
