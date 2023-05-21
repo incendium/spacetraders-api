@@ -6,21 +6,17 @@ import com.github.michaelbull.result.Ok
 import com.iamincendium.spacetraders.api.error.APIError
 import com.iamincendium.spacetraders.api.error.GenericHTTPError
 import com.iamincendium.spacetraders.api.error.GenericServerError
+import com.iamincendium.spacetraders.api.models.ErrorResponse
 import com.iamincendium.spacetraders.api.result.APIResult
 import com.iamincendium.spacetraders.api.util.runOrErrorAndFlatten
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
-import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.delay
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.intOrNull
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
 import mu.KotlinLogging
 
 private const val DEFAULT_RATE_LIMIT_PER_SECOND = 2
@@ -52,9 +48,7 @@ internal class DefaultRestClient(
 
             builder()
 
-            if (body !is MultiPartFormDataContent) {
-                contentType(ContentType.Application.Json)
-            }
+            contentType(ContentType.Application.Json)
         }
 
         updateRateLimitState(response.headers)
@@ -78,17 +72,7 @@ internal class DefaultRestClient(
     }
 
     private suspend fun mapFailureToError(response: HttpResponse): APIError = try {
-        val jsonObject = response.body<JsonObject>()
-        val code = jsonObject["code"]?.jsonPrimitive?.intOrNull
-        val message = jsonObject["message"]?.toString()
-        val data = jsonObject["data"]?.jsonObject
-
-        val status = response.status
-        if (code != null && message != null) {
-            codeToError(status, code, message, data ?: JsonObject(emptyMap()))
-        } else {
-            GenericHTTPError(status, message ?: status.description)
-        }
+        codeToError(response.status, response.body<ErrorResponse>().error)
     } catch (ex: NoTransformationFoundException) {
         @Suppress("MaxLineLength")
         LOG.debug(ex) { "Could not find serializer for error response; it is probably not an API error. Falling back to generic error." }
@@ -101,11 +85,9 @@ internal class DefaultRestClient(
     @Suppress("UNUSED_EXPRESSION")
     private fun codeToError(
         statusCode: HttpStatusCode,
-        code: Int,
-        message: String,
-        data: JsonObject,
-    ): APIError = when (code) {
-        else -> GenericServerError(statusCode, message, code, data)
+        error: ErrorResponse.Error,
+    ): APIError = when (error.code) {
+        else -> GenericServerError(statusCode, error.message, error.code, error.data)
     }
 
     override suspend fun get(path: String, builder: HttpRequestBuilder.() -> Unit): APIResult<HttpResponse> =
