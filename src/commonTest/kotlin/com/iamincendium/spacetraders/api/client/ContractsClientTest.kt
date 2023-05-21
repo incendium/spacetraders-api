@@ -45,7 +45,8 @@ class ContractsClientTest : FunSpec({
                         },
                         "accepted": false,
                         "fulfilled": false,
-                        "expiration": "2019-08-24T14:15:22Z"
+                        "expiration": "2019-08-24T14:15:22Z",
+                        "deadlineToAccept": "2019-08-24T14:15:22Z"
                     }
                 ],
                 "meta": {
@@ -78,6 +79,7 @@ class ContractsClientTest : FunSpec({
                 accepted = false,
                 fulfilled = false,
                 expiration = Instant.parse("2019-08-24T14:15:22Z"),
+                deadlineToAccept = Instant.parse("2019-08-24T14:15:22Z"),
             )),
             PageData(0, 0, 0),
         )
@@ -107,7 +109,8 @@ class ContractsClientTest : FunSpec({
                     },
                     "accepted": false,
                     "fulfilled": false,
-                    "expiration": "2019-08-24T14:15:22Z"
+                    "expiration": "2019-08-24T14:15:22Z",
+                    "deadlineToAccept": "2019-08-24T14:15:22Z"
                 }
             }
         """.trimIndent()
@@ -134,6 +137,7 @@ class ContractsClientTest : FunSpec({
                 accepted = false,
                 fulfilled = false,
                 expiration = Instant.parse("2019-08-24T14:15:22Z"),
+                deadlineToAccept = Instant.parse("2019-08-24T14:15:22Z"),
             ),
         )
     }
@@ -146,7 +150,8 @@ class ContractsClientTest : FunSpec({
                         "accountId": "string",
                         "symbol": "string",
                         "headquarters": "string",
-                        "credits": 0
+                        "credits": 0,
+                        "startingFaction": "string"
                     },
                     "contract": {
                         "id": "string",
@@ -169,7 +174,8 @@ class ContractsClientTest : FunSpec({
                         },
                         "accepted": false,
                         "fulfilled": false,
-                        "expiration": "2019-08-24T14:15:22Z"
+                        "expiration": "2019-08-24T14:15:22Z",
+                        "deadlineToAccept": "2019-08-24T14:15:22Z"
                     }
                 }
             }
@@ -184,6 +190,7 @@ class ContractsClientTest : FunSpec({
                     symbol = "string",
                     headquarters = "string",
                     credits = 0,
+                    startingFaction = "string",
                 ),
                 contract = Contract(
                     id = "string",
@@ -204,6 +211,7 @@ class ContractsClientTest : FunSpec({
                     accepted = false,
                     fulfilled = false,
                     expiration = Instant.parse("2019-08-24T14:15:22Z"),
+                    deadlineToAccept = Instant.parse("2019-08-24T14:15:22Z"),
                 ),
             ),
         )
@@ -234,7 +242,8 @@ class ContractsClientTest : FunSpec({
                         },
                         "accepted": false,
                         "fulfilled": false,
-                        "expiration": "2019-08-24T14:15:22Z"
+                        "expiration": "2019-08-24T14:15:22Z",
+                        "deadlineToAccept": "2019-08-24T14:15:22Z"
                     },
                     "cargo": {
                         "capacity": 0,
@@ -275,6 +284,7 @@ class ContractsClientTest : FunSpec({
                     accepted = false,
                     fulfilled = false,
                     expiration = Instant.parse("2019-08-24T14:15:22Z"),
+                    deadlineToAccept = Instant.parse("2019-08-24T14:15:22Z"),
                 ),
                 cargo = ShipCargo(
                     capacity = 0,
@@ -300,7 +310,8 @@ class ContractsClientTest : FunSpec({
                         "accountId": "string",
                         "symbol": "string",
                         "headquarters": "string",
-                        "credits": 0
+                        "credits": 0,
+                        "startingFaction": "string"
                     },
                     "contract": {
                         "id": "string",
@@ -323,7 +334,8 @@ class ContractsClientTest : FunSpec({
                         },
                         "accepted": false,
                         "fulfilled": false,
-                        "expiration": "2019-08-24T14:15:22Z"
+                        "expiration": "2019-08-24T14:15:22Z",
+                        "deadlineToAccept": "2019-08-24T14:15:22Z"
                     }
                 }
             }
@@ -338,6 +350,7 @@ class ContractsClientTest : FunSpec({
                     symbol = "string",
                     headquarters = "string",
                     credits = 0,
+                    startingFaction = "string",
                 ),
                 contract = Contract(
                     id = "string",
@@ -358,6 +371,7 @@ class ContractsClientTest : FunSpec({
                     accepted = false,
                     fulfilled = false,
                     expiration = Instant.parse("2019-08-24T14:15:22Z"),
+                    deadlineToAccept = Instant.parse("2019-08-24T14:15:22Z"),
                 ),
             ),
         )

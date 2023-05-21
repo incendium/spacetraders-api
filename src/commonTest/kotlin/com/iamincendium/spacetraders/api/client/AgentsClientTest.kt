@@ -15,7 +15,8 @@ class AgentsClientTest : FunSpec({
                     "accountId": "string",
                     "symbol": "string",
                     "headquarters": "string",
-                    "credits": 0
+                    "credits": 0,
+                    "startingFaction": "string"
                 }
             }
         """.trimIndent()
@@ -27,6 +28,7 @@ class AgentsClientTest : FunSpec({
             symbol = "string",
             headquarters = "string",
             credits = 0,
+            startingFaction = "string",
         ))
     }
 })

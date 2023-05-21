@@ -7,4 +7,5 @@ import kotlinx.serialization.Serializable
 public data class RefuelShipResponse(
     @SerialName("agent") val agent: Agent,
     @SerialName("fuel") val fuel: ShipFuel,
+    @SerialName("transaction") val transaction: MarketTransaction,
 )

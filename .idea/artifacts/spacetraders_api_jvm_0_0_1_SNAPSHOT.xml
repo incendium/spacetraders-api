@@ -1,8 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="spacetraders-api-jvm-0.0.1-SNAPSHOT">
     <output-path>$PROJECT_DIR$/build/libs</output-path>
-    <root id="archive" name="spacetraders-api-jvm-0.0.1-SNAPSHOT.jar">
-      <element id="module-output" name="spacetraders-api.jvmMain" />
-    </root>
+    <root id="archive" name="spacetraders-api-jvm-0.0.1-SNAPSHOT.jar" />
   </artifact>
 </component>

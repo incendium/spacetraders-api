@@ -10,4 +10,5 @@ public data class Faction(
     @SerialName("description") val description: String,
     @SerialName("headquarters") val headquarters: String,
     @SerialName("traits") val traits: List<FactionTrait>,
+    @SerialName("isRecruiting") val isRecruiting: Boolean,
 )

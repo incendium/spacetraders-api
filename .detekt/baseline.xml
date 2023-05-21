@@ -2,6 +2,7 @@
 <SmellBaseline>
   <ManuallySuppressedIssues></ManuallySuppressedIssues>
   <CurrentIssues>
+    <ID>ForbiddenComment:Contract.kt$Contract$// TODO: Remove this when either it is removed from the API endpoint or kotlinx.serialization adds a per-object</ID>
     <ID>ForbiddenComment:DefaultRestClient.kt$DefaultRestClient$// TODO: Remove suppression once custom cases are actually added.</ID>
   </CurrentIssues>
 </SmellBaseline>

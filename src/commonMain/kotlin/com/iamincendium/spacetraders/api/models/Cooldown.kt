@@ -9,5 +9,5 @@ public data class Cooldown(
     @SerialName("shipSymbol") val shipSymbol: String,
     @SerialName("totalSeconds") val totalSeconds: Int,
     @SerialName("remainingSeconds") val remainingSeconds: Int,
-    @SerialName("expiration") val expiration: Instant,
+    @SerialName("expiration") val expiration: Instant? = null,
 )

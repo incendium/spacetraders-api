@@ -286,7 +286,8 @@ class FleetClientTest : FunSpec({
                         "accountId": "string",
                         "symbol": "string",
                         "headquarters": "string",
-                        "credits": 0
+                        "credits": 0,
+                        "startingFaction": "string"
                     },
                     "ship": {
                         "symbol": "string",
@@ -440,6 +441,7 @@ class FleetClientTest : FunSpec({
                     symbol = "string",
                     headquarters = "string",
                     credits = 0,
+                    startingFaction = "string",
                 ),
                 ship = Ship(
                     symbol = "string",
@@ -1712,7 +1714,8 @@ class FleetClientTest : FunSpec({
                         "accountId": "string",
                         "symbol": "string",
                         "headquarters": "string",
-                        "credits": 0
+                        "credits": 0,
+                        "startingFaction": "string"
                     },
                     "cargo": {
                         "capacity": 0,
@@ -1754,6 +1757,7 @@ class FleetClientTest : FunSpec({
                     symbol = "string",
                     headquarters = "string",
                     credits = 0,
+                    startingFaction = "string",
                 ),
                 cargo = ShipCargo(
                     capacity = 0,
@@ -2029,7 +2033,8 @@ class FleetClientTest : FunSpec({
                         "accountId": "string",
                         "symbol": "string",
                         "headquarters": "string",
-                        "credits": 0
+                        "credits": 0,
+                        "startingFaction": "string"
                     },
                     "fuel": {
                         "current": 0,
@@ -2038,6 +2043,16 @@ class FleetClientTest : FunSpec({
                             "amount": 0,
                             "timestamp": "2019-08-24T14:15:22Z"
                         }
+                    },
+                    "transaction": {
+                        "waypointSymbol": "string",
+                        "shipSymbol": "string",
+                        "tradeSymbol": "string",
+                        "type": "PURCHASE",
+                        "units": 1,
+                        "pricePerUnit": 1,
+                        "totalPrice": 1,
+                        "timestamp": "2019-08-24T14:15:22Z"
                     }
                 }
             }
@@ -2052,6 +2067,7 @@ class FleetClientTest : FunSpec({
                     symbol = "string",
                     headquarters = "string",
                     credits = 0,
+                    startingFaction = "string",
                 ),
                 fuel = ShipFuel(
                     current = 0,
@@ -2060,6 +2076,16 @@ class FleetClientTest : FunSpec({
                         amount = 0,
                         timestamp = Instant.parse("2019-08-24T14:15:22Z")
                     ),
+                ),
+                transaction = MarketTransaction(
+                    waypointSymbol = "string",
+                    shipSymbol = "string",
+                    tradeSymbol = "string",
+                    type = MarketTransaction.Type.PURCHASE,
+                    units = 1,
+                    pricePerUnit = 1,
+                    totalPrice = 1,
+                    timestamp = Instant.parse("2019-08-24T14:15:22Z"),
                 ),
             )
         )
@@ -2073,7 +2099,8 @@ class FleetClientTest : FunSpec({
                         "accountId": "string",
                         "symbol": "string",
                         "headquarters": "string",
-                        "credits": 0
+                        "credits": 0,
+                        "startingFaction": "string"
                     },
                     "cargo": {
                         "capacity": 0,
@@ -2115,6 +2142,7 @@ class FleetClientTest : FunSpec({
                     symbol = "string",
                     headquarters = "string",
                     credits = 0,
+                    startingFaction = "string",
                 ),
                 cargo = ShipCargo(
                     capacity = 0,
@@ -2179,6 +2207,65 @@ class FleetClientTest : FunSpec({
                         description = "string",
                         units = 1,
                     )),
+                ),
+            )
+        )
+    }
+
+    test("negotiateContract - should handle the example data") {
+        val response = """
+            {
+                "data": {
+                    "contract": {
+                        "id": "string",
+                        "factionSymbol": "string",
+                        "type": "PROCUREMENT",
+                        "terms": {
+                            "deadline": "2019-08-24T14:15:22Z",
+                            "payment": {
+                                "onAccepted": 0,
+                                "onFulfilled": 0
+                            },
+                            "deliver": [
+                                {
+                                    "tradeSymbol": "string",
+                                    "destinationSymbol": "string",
+                                    "unitsRequired": 0,
+                                    "unitsFulfilled": 0
+                                }
+                            ]
+                        },
+                        "accepted": false,
+                        "fulfilled": false,
+                        "expiration": "2019-08-24T14:15:22Z",
+                        "deadlineToAccept": "2019-08-24T14:15:22Z"
+                    }
+                }
+            }
+        """.trimIndent()
+
+        val api = mockApiClient(HttpMethod.Post, "/my/ships/string/negotiate/contract", response)
+
+        assertThat(api.fleet.negotiateContract("string")).isValidResponse(
+            NegotiateContractResponse(
+                contract = Contract(
+                    id = "string",
+                    factionSymbol = "string",
+                    type = Contract.Type.PROCUREMENT,
+                    terms = ContractTerms(
+                        deadline = Instant.parse("2019-08-24T14:15:22Z"),
+                        payment = ContractPayment(0, 0),
+                        deliver = listOf(ContractDeliverGood(
+                            tradeSymbol = "string",
+                            destinationSymbol = "string",
+                            unitsRequired = 0,
+                            unitsFulfilled = 0,
+                        )),
+                    ),
+                    accepted = false,
+                    fulfilled = false,
+                    expiration = Instant.parse("2019-08-24T14:15:22Z"),
+                    deadlineToAccept = Instant.parse("2019-08-24T14:15:22Z"),
                 ),
             )
         )

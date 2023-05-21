@@ -405,4 +405,18 @@ public class FleetClient internal constructor(private val client: RestClient) {
         client.post("/my/ships/$shipSymbol/transfer") { setBody(transferCargoRequest) }
             .map { it.body<Response<CargoTransfer>>() }
     }
+
+    /**
+     * #### Negotiate Contract
+     *
+     * Negotiate a new contract.
+     *
+     * @param shipSymbol The symbol of the ship
+     */
+    public suspend fun negotiateContract(
+        shipSymbol: String,
+    ): APIResult<Response<NegotiateContractResponse>> = client.runRequiringToken {
+        client.post("/my/ships/$shipSymbol/negotiate/contract")
+            .map { it.body<Response<NegotiateContractResponse>>() }
+    }
 }

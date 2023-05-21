@@ -6,13 +6,14 @@ import com.iamincendium.spacetraders.api.client.ContractsClient
 import com.iamincendium.spacetraders.api.client.DefaultClient
 import com.iamincendium.spacetraders.api.client.FactionsClient
 import com.iamincendium.spacetraders.api.client.FleetClient
+import com.iamincendium.spacetraders.api.client.RegisterClient
 import com.iamincendium.spacetraders.api.client.SystemsClient
 import com.iamincendium.spacetraders.api.client.internal.RestClient
 import com.iamincendium.spacetraders.api.client.internal.defaultHttpClient
 import com.iamincendium.spacetraders.api.models.RegisterRequest
 import com.iamincendium.spacetraders.api.models.Registration
 import com.iamincendium.spacetraders.api.result.APIResult
-import io.ktor.client.HttpClient
+import io.ktor.client.*
 
 /**
  * A rate limit aware API client for the Space Traders API.
@@ -44,7 +45,8 @@ public class SpaceTradersClient internal constructor(
 
     private val restClient = RestClient(apiToken, baseUrl, httpClient)
 
-    private val default: DefaultClient by lazy { DefaultClient(restClient) }
+    private val register: RegisterClient by lazy { RegisterClient(restClient) }
+    public val default: DefaultClient by lazy { DefaultClient(restClient) }
     public val agents: AgentsClient by lazy { AgentsClient(restClient) }
     public val contracts: ContractsClient by lazy { ContractsClient(restClient) }
     public val factions: FactionsClient by lazy { FactionsClient(restClient) }
@@ -71,9 +73,10 @@ public class SpaceTradersClient internal constructor(
         public suspend fun register(
             agentSymbol: String,
             faction: RegisterRequest.Faction,
+            email: String? = null,
         ): APIResult<Registration> {
             val client = SpaceTradersClient()
-            return client.default.register(agentSymbol, faction).map { it.payload }
+            return client.register.register(agentSymbol, faction, email).map { it.payload }
         }
     }
 }

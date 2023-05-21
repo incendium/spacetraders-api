@@ -26,7 +26,8 @@ class FactionsClientTest : FunSpec({
                                 "name": "string",
                                 "description": "string"
                             }
-                        ]
+                        ],
+                        "isRecruiting": true
                     }
                 ],
                 "meta": {
@@ -52,6 +53,7 @@ class FactionsClientTest : FunSpec({
                         description = "string",
                     )
                 ),
+                isRecruiting = true,
             )),
             PageData(0, 0, 0),
         )
@@ -71,7 +73,8 @@ class FactionsClientTest : FunSpec({
                             "name": "string",
                             "description": "string"
                         }
-                    ]
+                    ],
+                    "isRecruiting": true
                 }
             }
         """.trimIndent()
@@ -91,6 +94,7 @@ class FactionsClientTest : FunSpec({
                         description = "string",
                     )
                 ),
+                isRecruiting = true,
             ),
         )
     }

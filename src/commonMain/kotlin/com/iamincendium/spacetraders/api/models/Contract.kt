@@ -12,7 +12,13 @@ public data class Contract(
     @SerialName("terms") val terms: ContractTerms,
     @SerialName("accepted") val accepted: Boolean = false,
     @SerialName("fulfilled") val fulfilled: Boolean = false,
+
+    // TODO: Remove this when either it is removed from the API endpoint or kotlinx.serialization adds a per-object
+    //  (de)serialization ignore annotation like Jackson.
+    @Deprecated("Use deadlineToAccept instead.", ReplaceWith("deadlineToAccept"), DeprecationLevel.HIDDEN)
     @SerialName("expiration") val expiration: Instant,
+
+    @SerialName("deadlineToAccept") val deadlineToAccept: Instant,
 ) {
     @Serializable
     public enum class Type {
