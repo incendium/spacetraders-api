@@ -7,6 +7,7 @@ import io.ktor.client.plugins.logging.*
 import io.ktor.serialization.kotlinx.json.*
 
 private const val AUTH_PREFIX = "-> Authorization: Bearer"
+private val AUTH_REGEX = """$AUTH_PREFIX.*""".toRegex(RegexOption.IGNORE_CASE)
 
 internal fun defaultHttpClient(
     engine: HttpClientEngine = defaultHttpEngine(),
@@ -17,13 +18,7 @@ internal fun defaultHttpClient(
             private val delegate = Logger.DEFAULT
 
             override fun log(message: String) {
-                delegate.log(
-                    if (message.startsWith(AUTH_PREFIX)) {
-                        "$AUTH_PREFIX <token hidden>"
-                    } else {
-                        message
-                    }
-                )
+                delegate.log(message.replace(AUTH_REGEX, "$AUTH_PREFIX <token hidden>"))
             }
         }
         level = logLevel
