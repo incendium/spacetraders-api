@@ -81,8 +81,6 @@ internal class DefaultRestClient(
         GenericHTTPError(status, status.description)
     }
 
-    // TODO: Remove suppression once custom cases are actually added.
-    @Suppress("UNUSED_EXPRESSION")
     private fun codeToError(
         statusCode: HttpStatusCode,
         error: ErrorResponse.Error,
