@@ -12,7 +12,21 @@ The goal for this project is to have an easy to use, functional programming-frie
 targets.  The big goals are to support at least Kotlin/JVM, Kotlin/JS, and Kotlin/WASM.  Contributors are most welcome 
 to help implement other targets such as Android, iOS, Native, etc.
 
-### How do I use it?
+### How do I test it out?
+
+This library is currently not published in Maven Central, however, snapshot builds are periodically pushed to Sonatype.
+You can access it via the Sonatype snapshots repository:
+
+```kotlin
+// build.gradle.kts
+repositories {
+    maven("https://oss.sonatype.org/content/repositories/snapshots/")
+}
+
+dependencies {
+    implementation("com.iamincendium.spacetraders:spacetraders-api:0.0.1-SNAPSHOT")
+}
+```
 
 The first step to utilizing this library is to acquire a token from the API. This can be done via a static method on the
 `SpaceTradersAPI` class:
@@ -38,19 +52,3 @@ api.fleet.listShips()
 ```
 
 TODO: Generate and link Dokka documentation here.
-
-### How do I test it out?
-
-This library is currently not published in Maven Central, however, snapshot builds are periodically pushed to Sonatype.
-You can access it via the Sonatype snapshots repository:
-
-```kotlin
-// build.gradle.kts
-repositories {
-    maven("https://oss.sonatype.org/content/repositories/snapshots/")
-}
-
-dependencies {
-    implementation("com.iamincendium.spacetraders:spacetraders-api:0.0.1-SNAPSHOT")
-}
-```
