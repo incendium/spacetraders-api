@@ -18,7 +18,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Build Documentation
-        run: ./gradlew dokka
+        run: ./gradlew dokkaHtml
 
       - uses: actions/upload-pages-artifact@v1
         with:
