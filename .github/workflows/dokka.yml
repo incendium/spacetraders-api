@@ -20,7 +20,7 @@ jobs:
       - name: Build Documentation
         run: ./gradlew dokka
 
-      - uses: actions/upload-pages-artifact
+      - uses: actions/upload-pages-artifact@v1
         with:
           path: build/dokka/html/
 
