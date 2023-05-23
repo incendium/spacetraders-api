@@ -51,4 +51,4 @@ api.fleet.listShips()
     .forEach { api.fleet.dockShip(it.symbol) }
 ```
 
-TODO: Generate and link Dokka documentation here.
+Full KDocs are available [here](https://incendium.github.io/spacetraders-api/).
